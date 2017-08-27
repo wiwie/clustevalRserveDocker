@@ -10,5 +10,6 @@ WORKDIR /
 RUN wget https://bitbucket.org/jerry00/densitycut_dev/get/v0.01.tar.gz
 RUN R -e 'install.packages("/v0.01.tar.gz", repos = NULL, type="source")'
 
+ENV CLUSTEVAL_RSERVE_PORT 6311
 EXPOSE ${CLUSTEVAL_RSERVE_PORT}
 ENTRYPOINT R -e "Rserve::run.Rserve(remote=TRUE, port=${CLUSTEVAL_RSERVE_PORT})" 
