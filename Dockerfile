@@ -12,4 +12,8 @@ RUN R -e 'install.packages("/v0.01.tar.gz", repos = NULL, type="source")'
 
 ENV CLUSTEVAL_RSERVE_PORT 6311
 EXPOSE ${CLUSTEVAL_RSERVE_PORT}
-ENTRYPOINT R -e "Rserve::run.Rserve(remote=TRUE, port=${CLUSTEVAL_RSERVE_PORT})" 
+
+# add Rserv.conf
+ADD Rserv.conf /etc/Rserve.conf
+
+ENTRYPOINT R -e "Rserve::run.Rserve(remote=TRUE, port=${CLUSTEVAL_RSERVE_PORT}, config.file='/etc/Rserve.conf')" 
